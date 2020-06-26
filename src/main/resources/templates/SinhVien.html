@@ -2,38 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Danh Sach Sinh Viên</title>
+    <title>Danh Sách Sinh Viên</title>
 </head>
 <body>
-<!--<h1>Thêm sinh viên</h1>-->
-<!--<form th:action="@{/add}" method="POST" th:object="${lop}">-->
-<!--    Tên sinh viên: <input type="text" th:field="*{tenlop}">-->
-<!--    <button>Thêm</button>-->
-<!--</form>-->
-<h1 th:text="'Danh sách sinh viên lớp '+${tenLop}">Danh sách sinh viên </h1>
+<a th:href="@{/lop}">Trang chủ</a>
+<h1 th:text="'Danh sách sinh viên lớp '+${lop}">Danh sách sinh viên </h1>
 <table border="">
     <tr>
         <th>#</th>
         <th>Mã sinh viên</th>
         <th>Tên sinh viên</th>
-        <th:block th:each="sv : ${lop.sinhviens}">
-            <th:block th:each="monHoc : ${sv.monhocs}">
-                <th:block th:if="${monHoc.diem}">
-                    <th th:text="${monHoc.mamon}"></th>
-                </th:block>
-            </th:block>
-        </th:block>
         <th>Điểm trung bình</th>
+        <th></th>
     </tr>
-    <tr th:each="sv, state : ${lop.sinhviens}">
+    <tr th:each="diem, state : ${diemTB}">
         <td th:text="${state.count}"></td>
-        <td th:text="${sv.masv}"></td>
-        <td th:text="${sv.tensv}"></td>
-        <th:block th:each="diemSV : ${sv.monhocs}">
-            <td th:text="${diemSV.diem}"></td>
-        </th:block>
+        <td th:text="${diem.sv.masv}"></td>
+        <td th:text="${diem.sv.tensv}"></td>
+        <td th:text="${diem.diem}"></td>
+        <td><a th:href="@{'/detail/'+${diem.sv.masv}}">Chi tiết</a></td>
     </tr>
 </table>
 
+<h1 th:text="'Danh sách sinh viên điểm trung bình trên 5 lớp '+${lop}">Danh sách sinh viên </h1>
+<table border="">
+    <tr>
+        <th>#</th>
+        <th>Mã sinh viên</th>
+        <th>Tên sinh viên</th>
+        <th>Điểm trung bình</th>
+        <th></th>
+    </tr>
+    <tr th:each="diem, state : ${diemTB}">
+        <th:block th:if="${diem.diem>5}">
+            <td th:text="${state.count}"></td>
+            <td th:text="${diem.sv.masv}"></td>
+            <td th:text="${diem.sv.tensv}"></td>
+            <td th:text="${diem.diem}"></td>
+            <td><a th:href="@{'/detail/'+${diem.sv.masv}}">Chi tiết</a></td>
+        </th:block>
+    </tr>
+</table>
 </body>
 </html>

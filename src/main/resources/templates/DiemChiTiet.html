@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Sinh Viên</title>
+</head>
+<body>
+<a th:href="@{/lop}">Trang chủ</a>
+<h1 th:text="'Điểm chi tiết sinh viên '+${tenSV}">Danh sách sinh viên </h1>
+<table border="">
+    <tr>
+        <th>#</th>
+        <th>Mã môn học</th>
+        <th>Điểm</th>
+    </tr>
+    <tr th:each="monHoc, state : ${monHocList}">
+        <td th:text="${state.count}"></td>
+        <td th:text="${monHoc.mamon}"></td>
+        <td th:text="${monHoc.diem}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
