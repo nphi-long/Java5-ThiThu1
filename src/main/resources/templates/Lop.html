@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sach Lớp</title>
+</head>
+<body>
+<h1>Thêm Lớp</h1>
+<form th:action="@{/add}" method="POST" th:object="${lop}">
+    Tên Lớp: <input type="text" th:field="*{tenlop}">
+    <button>Thêm</button>
+</form>
+<h1>Danh Sách Lớp</h1>
+<table border="">
+    <tr>
+        <th>#</th>
+        <th>Tên lớp</th>
+        <th></th>
+    </tr>
+    <tr th:each="lop, state : ${lopList}">
+        <td th:text="${state.count}"></td>
+        <td th:text="${lop.tenlop}"></td>
+        <td><a th:href="@{'/lop/'+${lop.malop}}">Sinh viên</a> </td>
+    </tr>
+</table>
+</body>
+</html>

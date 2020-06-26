@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sach Sinh Viên</title>
+</head>
+<body>
+<!--<h1>Thêm sinh viên</h1>-->
+<!--<form th:action="@{/add}" method="POST" th:object="${lop}">-->
+<!--    Tên sinh viên: <input type="text" th:field="*{tenlop}">-->
+<!--    <button>Thêm</button>-->
+<!--</form>-->
+<h1 th:text="'Danh sách sinh viên lớp '+${tenLop}">Danh sách sinh viên </h1>
+<table border="">
+    <tr>
+        <th>#</th>
+        <th>Mã sinh viên</th>
+        <th>Tên sinh viên</th>
+        <th:block th:each="sv : ${lop.sinhviens}">
+            <th:block th:each="monHoc : ${sv.monhocs}">
+                <th:block th:if="${monHoc.diem}">
+                    <th th:text="${monHoc.mamon}"></th>
+                </th:block>
+            </th:block>
+        </th:block>
+        <th>Điểm trung bình</th>
+    </tr>
+    <tr th:each="sv, state : ${lop.sinhviens}">
+        <td th:text="${state.count}"></td>
+        <td th:text="${sv.masv}"></td>
+        <td th:text="${sv.tensv}"></td>
+        <th:block th:each="diemSV : ${sv.monhocs}">
+            <td th:text="${diemSV.diem}"></td>
+        </th:block>
+    </tr>
+</table>
+
+</body>
+</html>
